@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/* ── Tailwind v4 Theme Tokens Mapping ────────────────────────── */
+@theme {
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-gold: var(--gold);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+}
+
+/* ── Design Tokens ────────────────────────────────────────────── */
+
+/* 1. Dark Theme — الوضع الداكن (الافتراضي عند إضافة كلاس dark أو كلاس القياسي) */
+:root,
+.dark,
+[data-theme="dark"] {
+  /* Surface layers — Obsidian Night & Dark Violet Gray */
+  --bg-base: #0f0e13;
+  --bg-surface: #181621;
+  --bg-elevated: #242030;
+  --bg-overlay: rgba(24, 22, 33, 0.88);
+
+  /* Accent — Electric Violet (البنفسجي الملكي) */
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --accent-muted: rgba(139, 92, 246, 0.15);
+  --accent-glow: rgba(139, 92, 246, 0.35);
+
+  /* Secondary Accent — Warm Gold (الذهبي الدافئ) */
+  --gold: #eab308;
+  --gold-muted: rgba(234, 179, 8, 0.15);
+
+  /* Warm Highlight — Coral Amber */
+  --amber: #f97316;
+  --amber-muted: rgba(249, 115, 22, 0.15);
+
+  /* Danger — Crimson Rose */
+  --danger: #f43f5e;
+  --danger-muted: rgba(244, 63, 94, 0.15);
+
+  /* Text — Bright Snow & Ash Gray */
+  --text-primary: #fafafa;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  /* Borders & Dividers */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-accent: rgba(139, 92, 246, 0.4);
+
+  /* Glassmorphism setup */
+  --glass-bg: rgba(24, 22, 33, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Scrollbar Track */
+  --scrollbar-track: var(--bg-base);
+}
+
+/* 2. Light Theme — الوضع الفاتح (يُفعل فور تحويل الثيم إلى light عبر next-themes) */
+.light,
+[data-theme="light"] {
+  /* Surface layers — Clean Soft Porcelain */
+  --bg-base: #faf9fc;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f1eff7;
+  --bg-overlay: rgba(255, 255, 255, 0.88);
+
+  /* Accent — Deep Royal Violet */
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-muted: rgba(124, 58, 237, 0.1);
+  --accent-glow: rgba(124, 58, 237, 0.2);
+
+  /* Secondary Accent — Deep Gold */
+  --gold: #ca8a04;
+  --gold-muted: rgba(202, 138, 4, 0.1);
+
+  /* Warm Highlight — Crisp Amber */
+  --amber: #ea580c;
+  --amber-muted: rgba(234, 88, 12, 0.1);
+
+  /* Danger — Crisp Rose */
+  --danger: #e11d48;
+  --danger-muted: rgba(225, 29, 72, 0.1);
+
+  /* Text — Deep Contrast */
+  --text-primary: #110e1b;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+
+  /* Borders & Dividers */
+  --border: rgba(17, 14, 27, 0.08);
+  --border-accent: rgba(124, 58, 237, 0.3);
+
+  /* Glassmorphism setup */
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(17, 14, 27, 0.08);
+
+  /* Scrollbar Track */
+  --scrollbar-track: #f1eff7;
+}
+
+/* ── Base Reset ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-base) !important;
+  color: var(--text-primary) !important;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* ── Custom Scrollbar ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 99px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* ── Premium Glassmorphism Card ─────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.glass:hover {
+  border-color: var(--border-accent);
+}
+
+/* ── Modern Glow Effects ─────────────────────────────────────── */
+.glow-accent {
+  box-shadow: 0 0 30px -5px var(--accent-glow);
+}
+.glow-sm {
+  box-shadow: 0 0 15px -3px var(--accent-glow);
+}
+.glow-gold {
+  box-shadow: 0 0 20px -3px var(--gold-muted);
+}
+
+/* ── Scrollable container ─────────────────────────────────────── */
+.scrollable {
+  overflow-y: auto;
+  overflow-x: hidden;
+}

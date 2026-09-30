@@ -1,0 +1,155 @@
+{
+  "Common": {
+    "title": "MarketOS — POS Management",
+    "dashboard": "Dashboard",
+    "inventory": "Inventory",
+    "pos": "POS",
+    "themeToggle": "Toggle Theme",
+    "languageToggle": "العربية"
+  },
+
+  "Inventory": {
+    "badges": {
+      "outOfStock": "Out of Stock",
+      "lowStock": "Low Stock",
+      "inStock": "In Stock"
+    },
+    "modal": {
+      "editTitle": "Edit Inventory Record",
+      "addTitle": "Add Inventory Record",
+      "storeLabel": "Store",
+      "productLabel": "Product",
+      "quantityLabel": "Quantity",
+      "minStockLabel": "Min Stock",
+      "maxStockLabel": "Max Stock",
+      "locationLabel": "Location / Bin",
+      "locationPlaceholder": "e.g. Shelf A-3",
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes",
+      "addRecord": "Add Record"
+    },
+    "stats": {
+      "totalSkus": "Total SKUs",
+      "lowStock": "Low Stock",
+      "outOfStock": "Out of Stock",
+      "locations": "Locations"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search products…",
+      "allStores": "All Stores",
+      "addRecord": "Add Record"
+    },
+    "table": {
+      "product": "Product",
+      "store": "Store",
+      "qty": "Qty",
+      "minMax": "Min / Max",
+      "location": "Location",
+      "status": "Status",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "empty": {
+      "title": "No inventory records",
+      "description": "Add stock records to get started."
+    }
+  },
+
+  "Products": {
+    "modal": {
+      "editTitle": "Edit Product",
+      "addTitle": "New Product",
+      "categoryLabel": "Category",
+      "nameLabel": "Name",
+      "namePlaceholder": "Product name",
+      "skuLabel": "SKU",
+      "skuPlaceholder": "SKU-001",
+      "barcodeLabel": "Barcode",
+      "barcodePlaceholder": "Optional",
+      "priceLabel": "Price",
+      "pricePlaceholder": "0.00",
+      "unitLabel": "Unit",
+      "unitPlaceholder": "piece / kg / box",
+      "cancel": "Cancel",
+      "saveChanges": "Save Changes",
+      "createProduct": "Create Product"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search by name or SKU…",
+      "allCategories": "All Categories",
+      "newProduct": "New Product"
+    },
+    "table": {
+      "product": "Product",
+      "category": "Category",
+      "price": "Price",
+      "unit": "Unit",
+      "barcode": "Barcode",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "empty": {
+      "title": "No products found",
+      "description": "Create your first product to get started."
+    }
+  },
+  "DashboardKPIs": {
+    "totalRevenue": {
+      "label": "Total Revenue",
+      "sub": "Today: {amount}"
+    },
+    "totalSales": {
+      "label": "Total Sales",
+      "sub": "all time transactions"
+    },
+    "customers": {
+      "label": "Customers",
+      "sub": "registered accounts"
+    },
+    "lowStock": {
+      "label": "Low Stock Alerts",
+      "sub": "of {count} products"
+    },
+    "RecentTransactions": {
+      "title": "Recent Transactions",
+      "subtitle": "Last 10 sales",
+      "table": {
+        "saleId": "Sale ID",
+        "date": "Date",
+        "customer": "Customer",
+        "walkIn": "Walk-in",
+        "total": "Total",
+        "status": "Status"
+      }
+    }
+  },
+  "RevenueChart": {
+    "title": "Revenue — Last 30 Days"
+  },
+  "StockAlerts": {
+    "title": "Stock Alerts",
+    "itemsCount": "{count} items",
+    "empty": {
+      "title": "All stocks healthy",
+      "description": "No items below minimum threshold."
+    },
+    "badge": {
+      "out": "Out",
+      "left": "{count} left"
+    },
+    "minMax": "min {min} / max {max}"
+  },
+  "TopProducts": {
+    "title": "Top Products",
+    "subtitle": "by revenue",
+    "empty": "No sales data yet",
+    "unitsSold": "{count, plural, =1 {1 unit sold} other {# units sold}}"
+  },
+  "Header": {
+    "searchPlaceholder": "Search…"
+  }
+}

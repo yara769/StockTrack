@@ -1,0 +1,157 @@
+{
+  "Common": {
+    "title": "MarketOS — نظام إدارة المبيعات",
+    "dashboard": "لوحة التحكم",
+    "inventory": "المخزون",
+    "pos": "نقطة البيع",
+    "themeToggle": "تغيير الثيم",
+    "languageToggle": "English"
+  },
+  "Inventory": {
+    "badges": {
+      "outOfStock": "نفد من المخزون",
+      "lowStock": "مخزون منخفض",
+      "inStock": "متوفر في المخزون"
+    },
+    "modal": {
+      "editTitle": "تعديل سجل المخزون",
+      "addTitle": "إضافة سجل مخزون",
+      "storeLabel": "المتجر",
+      "productLabel": "المنتج",
+      "quantityLabel": "الكمية",
+      "minStockLabel": "الحد الأدنى للمخزون",
+      "maxStockLabel": "الحد الأقصى للمخزون",
+      "locationLabel": "الموقع / الرف",
+      "locationPlaceholder": "مثال: الرف A-3",
+      "cancel": "إلغاء",
+      "saveChanges": "حفظ التغييرات",
+      "addRecord": "إضافة السجل"
+    },
+    "stats": {
+      "totalSkus": "إجمالي المنتجات (SKUs)",
+      "lowStock": "مخزون منخفض",
+      "outOfStock": "نفد من المخزون",
+      "locations": "المواقع"
+    },
+    "toolbar": {
+      "searchPlaceholder": "البحث عن المنتجات...",
+      "allStores": "جميع المتاجر",
+      "addRecord": "إضافة سجل"
+    },
+    "table": {
+      "product": "المنتج",
+      "store": "المتجر",
+      "qty": "الكمية",
+      "minMax": "الحد الأدنى / الأقصى",
+      "location": "الموقع",
+      "status": "الحالة",
+      "actions": "الإجراءات",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "empty": {
+      "title": "لا توجد سجلات مخزون",
+      "description": "قم بإضافة سجلات مخزون للبدء."
+    }
+  },
+
+  "Products": {
+    "modal": {
+      "editTitle": "تعديل المنتج",
+      "addTitle": "منتج جديد",
+      "categoryLabel": "الفئة",
+      "nameLabel": "اسم المنتج",
+      "namePlaceholder": "أدخل اسم المنتج",
+      "skuLabel": "رمز المنتج (SKU)",
+      "skuPlaceholder": "SKU-001",
+      "barcodeLabel": "الباركود",
+      "barcodePlaceholder": "اختياري",
+      "priceLabel": "السعر",
+      "pricePlaceholder": "0.00",
+      "unitLabel": "الوحدة",
+      "unitPlaceholder": "قطعة / كغ / صندوق",
+      "cancel": "إلغاء",
+      "saveChanges": "حفظ التغييرات",
+      "createProduct": "إنشاء المنتج"
+    },
+    "toolbar": {
+      "searchPlaceholder": "البحث بالاسم أو الـ SKU...",
+      "allCategories": "جميع الفئات",
+      "newProduct": "منتج جديد"
+    },
+    "table": {
+      "product": "المنتج",
+      "category": "الفئة",
+      "price": "السعر",
+      "unit": "الوحدة",
+      "barcode": "الباركود",
+      "status": "الحالة",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "empty": {
+      "title": "لم يتم العثور على منتجات",
+      "description": "قم بإنشاء منتجك الأول للبدء."
+    }
+  },
+
+  "DashboardKPIs": {
+    "totalRevenue": {
+      "label": "إجمالي الإيرادات",
+      "sub": "اليوم: {amount}"
+    },
+    "totalSales": {
+      "label": "إجمالي المبيعات",
+      "sub": "إجمالي المعاملات"
+    },
+    "customers": {
+      "label": "العملاء",
+      "sub": "الحسابات المسجلة"
+    },
+    "lowStock": {
+      "label": "تنبيهات انخفاض المخزون",
+      "sub": "من أصل {count} منتج"
+    }
+  },
+
+  "RecentTransactions": {
+    "title": "المعاملات الأخيرة",
+    "subtitle": "آخر 10 عمليات بيع",
+    "table": {
+      "saleId": "رمز العملية",
+      "date": "التاريخ",
+      "customer": "العميل",
+      "walkIn": "عميل عابر",
+      "total": "الإجمالي",
+      "status": "الحالة"
+    },
+    "RevenueChart": {
+      "title": "الإيرادات — آخر 30 يوماً"
+    }
+  },
+  "StockAlerts": {
+    "title": "تنبيهات المخزون",
+    "itemsCount": "{count} عناصر",
+    "empty": {
+      "title": "المخزون بحالة جيدة",
+      "description": "لا توجد عناصر أقل من الحد الأدنى."
+    },
+    "badge": {
+      "out": "نفد",
+      "left": "متبقي {count}"
+    },
+    "minMax": "الحد الأدنى {min} / الحد الأقصى {max}"
+  },
+  "TopProducts": {
+    "title": "المنتجات الأكثر مبيعاً",
+    "subtitle": "حسب الإيرادات",
+    "empty": "لا توجد بيانات مبيعات حتى الآن",
+    "unitsSold": "{count, plural, =1 {وحدة واحدة مباعة} other {# وحدات مباعة}}"
+  },
+  "Header": {
+    "searchPlaceholder": "بحث…"
+  }
+
+}
