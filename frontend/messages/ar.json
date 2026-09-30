@@ -126,12 +126,11 @@
       "walkIn": "عميل عابر",
       "total": "الإجمالي",
       "status": "الحالة"
-    },
-    "RevenueChart": {
-      "title": "الإيرادات — آخر 30 يوماً"
     }
   },
-  "StockAlerts": {
+  "RevenueChart": {
+    "title": "الإيرادات — آخر 30 يوماً"
+  }, {
     "title": "تنبيهات المخزون",
     "itemsCount": "{count} عناصر",
     "empty": {
@@ -152,6 +151,338 @@
   },
   "Header": {
     "searchPlaceholder": "بحث…"
+  },
+  "Sidebar": {
+    "dashboard": "لوحة التحكم",
+    "inventory": "المخزون",
+    "pos": "نقطة البيع / المبيعات",
+    "purchases": "المشتريات",
+    "returns": "المرتجعات",
+    "payments": "المدفوعات",
+    "customers": "العملاء",
+    "stores": "المتاجر",
+    "reports": "التقارير",
+    "collapse": "طي القائمة"
+  },
+  "POS": {
+    "storeLabel": "المتجر *",
+    "storePlaceholder": "اختر المتجر...",
+    "customerLabel": "العميل",
+    "walkInCustomer": "عميل عابر",
+    "cashierLabel": "أمين الصندوق",
+    "noCashier": "بدون أمين صندوق",
+    "searchPlaceholder": "ابحث عن المنتجات بالاسم، الرمز (SKU) أو الباركود...",
+    "noProductsFound": "لم يتم العثور على منتجات",
+    "cart": "السلة",
+    "clearAll": "مسح الكل",
+    "emptyCart": "أضف منتجات للبدء بالبيع",
+    "discount": "الخصم",
+    "subtotal": "المجموع الفرعي",
+    "tax": "الضريبة (15%)",
+    "total": "الإجمالي",
+    "charge": "تحصيل {amount}",
+    "selectStoreWarning": "اختر متجراً لتمكين الدفع",
+    "PaymentModal": {
+      "title": "معالجة الدفع",
+      "totalDue": "المبلغ المستحق",
+      "paymentMethod": "طريقة الدفع",
+      "cash": "نقداً",
+      "card": "بطاقة",
+      "transfer": "تحويل",
+      "refLabel": "رقم المرجع / المعاملة",
+      "refPlaceholder": "اختياري",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد الدفع"
+    },
+    "InvoiceModal": {
+      "title": "إيصال البيع",
+      "success": "تمت عملية الدفع بنجاح",
+      "paidVia": "تم الدفع بواسطة {method}",
+      "newSale": "عملية بيع جديدة"
+    }
+  },
+  "SalesHistory": {
+    "modalTitle": "مبيعة #{id}",
+    "labels": {
+      "date": "التاريخ",
+      "customer": "العميل",
+      "status": "الحالة",
+      "items": "العناصر",
+      "subtotal": "المجموع الفرعي",
+      "tax": "الضريبة",
+      "discount": "الخصم",
+      "total": "الإجمالي",
+      "payments": "المدفوعات"
+    },
+    "defaults": {
+      "walkIn": "زبون عابر",
+      "noItems": "لا تتوفر تفاصيل للعناصر"
+    },
+    "columns": {
+      "saleId": "معرف المبيعة",
+      "date": "التاريخ",
+      "customer": "العميل",
+      "cashier": "الكاشير",
+      "total": "الإجمالي",
+      "status": "الحالة"
+    },
+    "searchPlaceholder": "البحث حسب المعرف، العميل، أو الحالة...",
+    "recordsCount": "{count} سجلات",
+    "actions": {
+      "view": "عرض"
+    },
+    "emptyState": {
+      "title": "لم يتم العثور على مبيعات",
+      "description": "ستظهر المعاملات هنا بمجرد إجراء المبيعات."
+    }
+  },
+  "purchase_orders": {
+    "title": "أوامر الشراء",
+    "stats": {
+      "total_orders": "إجمالي الأوامر",
+      "pending": "معلقة",
+      "total_value": "القيمة الإجمالية"
+    },
+    "filters": {
+      "search_placeholder": "ابحث بالرقم أو المورد…",
+      "status_all": "الكل",
+      "status_pending": "قيد الانتظار",
+      "status_received": "تم الاستلام"
+    },
+    "buttons": {
+      "new_po": "أمر شراء جديد",
+      "add_row": "إضافة صف",
+      "place_order": "تأكيد الطلب",
+      "cancel": "إلغاء",
+      "view": "عرض",
+      "delete": "حذف",
+      "mark_as_received": "تحديد كـ مستلم"
+    },
+    "table": {
+      "po_number": "رقم الأمر",
+      "supplier": "المورد",
+      "store": "المستودع / المتجر",
+      "ordered": "تاريخ الطلب",
+      "expected": "التاريخ المتوقع",
+      "total": "الإجمالي",
+      "status": "الحالة",
+      "actions": "الإجراءات"
+    },
+    "modals": {
+      "create_title": "إنشاء أمر شراء",
+      "supplier_label": "المورد *",
+      "supplier_placeholder": "اختر المورد…",
+      "store_label": "المتجر / المستودع *",
+      "store_placeholder": "التسليم إلى…",
+      "expected_date_label": "التاريخ المتوقع",
+      "items_title": "العناصر",
+      "product_header": "المنتج",
+      "qty_header": "الكمية",
+      "unit_cost_header": "سعر الوحدة",
+      "total_header": "المجموع",
+      "product_placeholder": "اختر المنتج…",
+      "no_items": "لا توجد عناصر"
+    },
+    "empty_state": {
+      "title": "لا توجد أوامر شراء",
+      "description": "أنشئ أول أمر شراء للبدء في توريد المخزون."
+    }
+  },
+  "suppliers": {
+    "title": "الموردون",
+    "modals": {
+      "edit_title": "تعديل بيانات المورد",
+      "new_title": "مورد جديد",
+      "company_name_label": "اسم الشركة *",
+      "company_name_placeholder": "اسم المورد أو الشركة",
+      "contact_person_label": "الشخص المسؤول",
+      "contact_person_placeholder": "الاسم الكامل",
+      "phone_label": "رقم الهاتف",
+      "phone_placeholder": "+966 5x xxx xxxx",
+      "email_label": "البريد الإلكتروني",
+      "email_placeholder": "contact@supplier.com",
+      "address_label": "العنوان",
+      "address_placeholder": "الشارع، المدينة، الدولة"
+    },
+    "table": {
+      "supplier": "المورد",
+      "phone": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "address": "العنوان",
+      "status": "الحالة",
+      "status_active": "نشط",
+      "status_inactive": "غير نشط"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "save_changes": "حفظ التغييرات",
+      "add_supplier": "إضافة المورد",
+      "new_supplier": "مورد جديد",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "search_placeholder": "البحث عن مورد..."
+    },
+    "empty_state": {
+      "title": "لا يوجد موردون بعد",
+      "description": "قم بإضافة أول مورد لبدء إنشاء أوامر الشراء."
+    }
+  },
+  "customers": {
+    "title": "العملاء",
+    "stats": {
+      "total_customers": "إجمالي العملاء",
+      "loyalty_points": "نقاط الولاء",
+      "top_spender": "الأعلى إنفاقاً"
+    },
+    "modals": {
+      "edit_title": "تعديل بيانات العميل",
+      "new_title": "عميل جديد",
+      "name_label": "الاسم الكامل *",
+      "name_placeholder": "اسم العميل",
+      "phone_label": "رقم الهاتف",
+      "phone_placeholder": "+966 5x xxx xxxx",
+      "email_label": "البريد الإلكتروني",
+      "address_label": "العنوان",
+      "loyalty_points_label": "نقاط الولاء"
+    },
+    "table": {
+      "customer": "العميل",
+      "phone": "رقم الهاتف",
+      "points": "النقاط",
+      "total_spent": "إجمالي المشتريات",
+      "status": "الحالة",
+      "status_active": "نشط",
+      "status_inactive": "غير نشط"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "save_changes": "حفظ التغييرات",
+      "add_customer": "إضافة العميل",
+      "new_customer": "عميل جديد",
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "filters": {
+      "search_placeholder": "البحث بالاسم، الهاتف، أو البريد الإلكتروني..."
+    },
+    "empty_state": {
+      "title": "لا يوجد عملاء",
+      "description": "قم بإضافة العملاء لمتابعة نقاط الولاء وسجل المشتريات."
+    }
+  },
+  "payments": {
+    "title": "المدفوعات",
+    "stats": {
+      "total_collected": "إجمالي المحصل",
+      "cash": "نقداً",
+      "card_transfer": "بطاقة / تحويل"
+    },
+    "modals": {
+      "record_title": "تسجيل عملية دفع",
+      "sale_label": "عملية البيع *",
+      "sale_placeholder": "اختر عملية بيع…",
+      "method_label": "طريقة الدفع",
+      "status_label": "الحالة",
+      "amount_label": "المبلغ *",
+      "ref_label": "المرجع",
+      "ref_placeholder": "اختياري"
+    },
+    "methods": {
+      "all": "جميع الطرق",
+      "cash": "نقداً",
+      "card": "بطاقة",
+      "transfer": "تحويل"
+    },
+    "status": {
+      "completed": "مكتملة",
+      "pending": "معلقة",
+      "failed": "فاشلة"
+    },
+    "table": {
+      "payment_no": "رقم الدفعة",
+      "sale": "عملية البيع",
+      "method": "طريقة الدفع",
+      "amount": "المبلغ",
+      "ref": "المرجع",
+      "paid_at": "تاريخ الدفع",
+      "status": "الحالة"
+    },
+    "buttons": {
+      "cancel": "إلغاء",
+      "record_payment": "تسجيل الدفعة",
+      "delete": "حذف"
+    },
+    "filters": {
+      "search_placeholder": "البحث بالرقم، عملية البيع أو المرجع…"
+    },
+    "empty_state": {
+      "title": "لا توجد مدفوعات",
+      "description": "ستظهر سجلات المدفوعات هنا."
+    }
+  },
+  "returns": {
+    "status": {
+      "all": "الكل",
+      "pending": "قيد الانتظار",
+      "approved": "مقبول",
+      "rejected": "مرفوض",
+      "completed": "مكتمل"
+    },
+    "createModal": {
+      "title": "إنشاء طلب إرجاع",
+      "saleLabel": "عملية البيع *",
+      "salePlaceholder": "اختر عملية البيع…",
+      "reasonLabel": "السبب",
+      "reasonPlaceholder": "اكتب سبب الإرجاع…",
+      "refundAmountLabel": "مبلغ المسترجع",
+      "statusLabel": "الحالة",
+      "cancel": "إلغاء",
+      "submit": "تقديم الطلب"
+    },
+    "updateModal": {
+      "title": "تحديث حالة الإرجاع",
+      "statusLabel": "الحالة الجديدة",
+      "cancel": "إلغاء",
+      "update": "تحديث"
+    },
+    "summary": {
+      "totalReturns": "إجمالي الإرجاعات",
+      "pending": "قيد الانتظار",
+      "totalRefunds": "إجمالي المبالغ المسترجعة"
+    },
+    "toolbar": {
+      "searchPlaceholder": "البحث بالرقم أو السبب…",
+      "newReturn": "إرجاع جديد"
+    },
+    "columns": {
+      "returnId": "رقم الإرجاع",
+      "sale": "البيع",
+      "reason": "السبب",
+      "refund": "المبلغ المسترجع",
+      "date": "التاريخ",
+      "status": "الحالة",
+      "actions": {
+        "update": "تحديث",
+        "delete": "حذف"
+      }
+    },
+    "emptyState": {
+      "title": "لا يوجد إرجاعات",
+      "description": "ستظهر طلبات الإرجاع هنا."
+    }
+  },
+  "status": {
+    "completed": "مكتمل",
+    "paid": "مدفوع",
+    "received": "تم الاستلام",
+    "active": "نشط",
+    "pending": "قيد الانتظار",
+    "partial": "جزئي",
+    "cancelled": "ملغى",
+    "failed": "فاشل",
+    "returned": "مسترجع",
+    "unknown": "غير معروف"
   }
-
 }

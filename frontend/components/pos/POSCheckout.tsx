@@ -2,7 +2,17 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Plus, Minus, Trash2, CreditCard, Banknote, Receipt, CheckCircle } from "lucide-react";
+import {
+  Search,
+  Plus,
+  Minus,
+  Trash2,
+  CreditCard,
+  Banknote,
+  Receipt,
+  CheckCircle,
+} from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   useProducts,
   useStores,
@@ -35,25 +45,37 @@ interface PaymentModalProps {
   loading: boolean;
 }
 
-function PaymentModal({ open, onClose, total, onConfirm, loading }: PaymentModalProps) {
+function PaymentModal({
+  open,
+  onClose,
+  total,
+  onConfirm,
+  loading,
+}: PaymentModalProps) {
+  const t = useTranslations("POS.PaymentModal");
   const [method, setMethod] = useState("cash");
-  const [ref, setRef]       = useState("");
+  const [ref, setRef] = useState("");
 
   const methods = [
-    { value: "cash",   label: "Cash",   icon: <Banknote  size={18} /> },
-    { value: "card",   label: "Card",   icon: <CreditCard size={18} /> },
-    { value: "transfer", label: "Transfer", icon: <Receipt size={18} /> },
+    { value: "cash", label: t("cash"), icon: <Banknote size={18} /> },
+    { value: "card", label: t("card"), icon: <CreditCard size={18} /> },
+    { value: "transfer", label: t("transfer"), icon: <Receipt size={18} /> },
   ];
 
   return (
-    <Modal open={open} onClose={onClose} title="Process Payment" size="sm">
+    <Modal open={open} onClose={onClose} title={t("title")} size="sm">
       <div className="space-y-5">
         {/* Total due */}
         <div
           className="rounded-xl p-4 text-center"
           style={{ background: "var(--bg-elevated)" }}
         >
-          <p className="text-xs mb-1" style={{ color: "var(--text-secondary)" }}>Total Due</p>
+          <p
+            className="text-xs mb-1"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {t("totalDue")}
+          </p>
           <p className="text-3xl font-bold" style={{ color: "var(--accent)" }}>
             {formatCurrency(total)}
           </p>
@@ -61,8 +83,11 @@ function PaymentModal({ open, onClose, total, onConfirm, loading }: PaymentModal
 
         {/* Payment method */}
         <div>
-          <p className="text-xs font-medium mb-2" style={{ color: "var(--text-secondary)" }}>
-            Payment Method
+          <p
+            className="text-xs font-medium mb-2"
+            style={{ color: "var(--text-secondary)" }}
+          >
+            {t("paymentMethod")}
           </p>
           <div className="grid grid-cols-3 gap-2">
             {methods.map((m) => (
@@ -71,9 +96,18 @@ function PaymentModal({ open, onClose, total, onConfirm, loading }: PaymentModal
                 onClick={() => setMethod(m.value)}
                 className="flex flex-col items-center gap-1.5 rounded-lg py-3 px-2 text-xs font-medium transition-all"
                 style={{
-                  background: method === m.value ? "var(--accent-muted)" : "var(--bg-elevated)",
-                  border:     method === m.value ? "1px solid var(--border-accent)" : "1px solid var(--border)",
-                  color:      method === m.value ? "var(--accent)" : "var(--text-secondary)",
+                  background:
+                    method === m.value
+                      ? "var(--accent-muted)"
+                      : "var(--bg-elevated)",
+                  border:
+                    method === m.value
+                      ? "1px solid var(--border-accent)"
+                      : "1px solid var(--border)",
+                  color:
+                    method === m.value
+                      ? "var(--accent)"
+                      : "var(--text-secondary)",
                 }}
               >
                 {m.icon}
@@ -86,22 +120,24 @@ function PaymentModal({ open, onClose, total, onConfirm, loading }: PaymentModal
         {/* Reference */}
         {method !== "cash" && (
           <Input
-            label="Reference / Transaction ID"
-            placeholder="Optional"
+            label={t("refLabel")}
+            placeholder={t("refPlaceholder")}
             value={ref}
             onChange={(e) => setRef(e.target.value)}
           />
         )}
 
         <div className="flex gap-3 pt-1">
-          <Button variant="secondary" onClick={onClose} className="flex-1">Cancel</Button>
+          <Button variant="secondary" onClick={onClose} className="flex-1">
+            {t("cancel")}
+          </Button>
           <Button
             className="flex-1"
             loading={loading}
             icon={<CheckCircle size={16} />}
             onClick={() => onConfirm(method, ref)}
           >
-            Confirm Payment
+            {t("confirm")}
           </Button>
         </div>
       </div>
@@ -122,9 +158,22 @@ interface InvoiceModalProps {
   paymentMethod: string;
 }
 
-function InvoiceModal({ open, onClose, saleId, cart, subtotal, tax, discount, total, paymentMethod }: InvoiceModalProps) {
+function InvoiceModal({
+  open,
+  onClose,
+  saleId,
+  cart,
+  subtotal,
+  tax,
+  discount,
+  total,
+  paymentMethod,
+}: InvoiceModalProps) {
+  const t = useTranslations("POS");
+  const tInvoice = useTranslations("POS.InvoiceModal");
+
   return (
-    <Modal open={open} onClose={onClose} title="Sale Receipt" size="sm">
+    <Modal open={open} onClose={onClose} title={tInvoice("title")} size="sm">
       <div className="space-y-4">
         {/* Header */}
         <div className="text-center">
@@ -134,10 +183,16 @@ function InvoiceModal({ open, onClose, saleId, cart, subtotal, tax, discount, to
           >
             <CheckCircle size={24} style={{ color: "var(--accent)" }} />
           </div>
-          <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-            Payment Successful
+          <p
+            className="text-sm font-semibold"
+            style={{ color: "var(--text-primary)" }}
+          >
+            {tInvoice("success")}
           </p>
-          <p className="text-xs mt-0.5 font-mono" style={{ color: "var(--text-muted)" }}>
+          <p
+            className="text-xs mt-0.5 font-mono"
+            style={{ color: "var(--text-muted)" }}
+          >
             #{saleId.slice(0, 8).toUpperCase()}
           </p>
         </div>
@@ -145,7 +200,10 @@ function InvoiceModal({ open, onClose, saleId, cart, subtotal, tax, discount, to
         {/* Items */}
         <div
           className="rounded-xl overflow-hidden divide-y"
-          style={{ borderColor: "var(--border)", border: "1px solid var(--border)" }}
+          style={{
+            borderColor: "var(--border)",
+            border: "1px solid var(--border)",
+          }}
         >
           {cart.map((item) => (
             <div
@@ -154,13 +212,21 @@ function InvoiceModal({ open, onClose, saleId, cart, subtotal, tax, discount, to
               style={{ background: "var(--bg-elevated)" }}
             >
               <div>
-                <p style={{ color: "var(--text-primary)" }}>{item.product.name}</p>
+                <p style={{ color: "var(--text-primary)" }}>
+                  {item.product.name}
+                </p>
                 <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-                  {item.qty} × {formatCurrency(parseFloat(item.product.price as string))}
+                  {item.qty} ×{" "}
+                  {formatCurrency(parseFloat(item.product.price as string))}
                 </p>
               </div>
-              <span className="font-semibold" style={{ color: "var(--text-primary)" }}>
-                {formatCurrency(item.qty * parseFloat(item.product.price as string))}
+              <span
+                className="font-semibold"
+                style={{ color: "var(--text-primary)" }}
+              >
+                {formatCurrency(
+                  item.qty * parseFloat(item.product.price as string),
+                )}
               </span>
             </div>
           ))}
@@ -169,9 +235,16 @@ function InvoiceModal({ open, onClose, saleId, cart, subtotal, tax, discount, to
         {/* Totals */}
         <div className="space-y-1.5 text-sm">
           {[
-            { label: "Subtotal", value: formatCurrency(subtotal) },
-            { label: "Tax (15%)", value: formatCurrency(tax) },
-            ...(discount > 0 ? [{ label: "Discount", value: `-${formatCurrency(discount)}` }] : []),
+            { label: t("subtotal"), value: formatCurrency(subtotal) },
+            { label: t("tax"), value: formatCurrency(tax) },
+            ...(discount > 0
+              ? [
+                  {
+                    label: t("discount"),
+                    value: `-${formatCurrency(discount)}`,
+                  },
+                ]
+              : []),
           ].map(({ label, value }) => (
             <div key={label} className="flex justify-between">
               <span style={{ color: "var(--text-secondary)" }}>{label}</span>
@@ -182,17 +255,19 @@ function InvoiceModal({ open, onClose, saleId, cart, subtotal, tax, discount, to
             className="flex justify-between font-semibold text-base pt-2 border-t"
             style={{ borderColor: "var(--border)" }}
           >
-            <span style={{ color: "var(--text-primary)" }}>Total</span>
-            <span style={{ color: "var(--accent)" }}>{formatCurrency(total)}</span>
+            <span style={{ color: "var(--text-primary)" }}>{t("total")}</span>
+            <span style={{ color: "var(--accent)" }}>
+              {formatCurrency(total)}
+            </span>
           </div>
         </div>
 
         <Badge variant="muted" className="w-full justify-center py-1.5">
-          Paid via {paymentMethod}
+          {tInvoice("paidVia", { method: paymentMethod })}
         </Badge>
 
         <Button variant="secondary" className="w-full" onClick={onClose}>
-          New Sale
+          {tInvoice("newSale")}
         </Button>
       </div>
     </Modal>
@@ -201,35 +276,41 @@ function InvoiceModal({ open, onClose, saleId, cart, subtotal, tax, discount, to
 
 // ── Main POS component ───────────────────────────────────────────────────────
 export function POSCheckout() {
-  const { data: products }  = useProducts();
-  const { data: stores }    = useStores();
+  const t = useTranslations("POS");
+
+  const { data: products } = useProducts();
+  const { data: stores } = useStores();
   const { data: customers } = useCustomers();
   const { data: employees } = useEmployees();
 
-  const createSale     = useCreateSale();
+  const createSale = useCreateSale();
   const createSaleItem = useCreateSaleItem();
-  const createPayment  = useCreatePayment();
+  const createPayment = useCreatePayment();
 
-  const [search, setSearch]         = useState("");
-  const [cart, setCart]             = useState<CartItem[]>([]);
-  const [discount, setDiscount]     = useState(0);
-  const [storeId, setStoreId]       = useState("");
-  const [custId, setCustId]         = useState("");
-  const [empId, setEmpId]           = useState("");
-  const [paymentOpen, setPaymentOpen]   = useState(false);
-  const [invoiceOpen, setInvoiceOpen]   = useState(false);
-  const [lastSaleId, setLastSaleId]     = useState("");
+  const [search, setSearch] = useState("");
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [discount, setDiscount] = useState(0);
+  const [storeId, setStoreId] = useState("");
+  const [custId, setCustId] = useState("");
+  const [empId, setEmpId] = useState("");
+  const [paymentOpen, setPaymentOpen] = useState(false);
+  const [invoiceOpen, setInvoiceOpen] = useState(false);
+  const [lastSaleId, setLastSaleId] = useState("");
   const [lastPayMethod, setLastPayMethod] = useState("cash");
-  const [processing, setProcessing]   = useState(false);
+  const [processing, setProcessing] = useState(false);
 
   // Computed totals
   const subtotal = useMemo(
-    () => cart.reduce((s, i) => s + i.qty * parseFloat(i.product.price as string), 0),
+    () =>
+      cart.reduce(
+        (s, i) => s + i.qty * parseFloat(i.product.price as string),
+        0,
+      ),
     [cart],
   );
   const taxRate = 0.15;
-  const tax     = subtotal * taxRate;
-  const total   = subtotal + tax - discount;
+  const tax = subtotal * taxRate;
+  const total = subtotal + tax - discount;
 
   // Product search
   const filteredProducts = useMemo(() => {
@@ -279,8 +360,8 @@ export function POSCheckout() {
       // 1. Create sale header
       const sale = await createSale.mutateAsync({
         store_id: storeId,
-        cust_id:  custId  || undefined,
-        emp_id:   empId   || undefined,
+        cust_id: custId || undefined,
+        emp_id: empId || undefined,
         subtotal,
         tax,
         discount,
@@ -292,9 +373,9 @@ export function POSCheckout() {
       await Promise.all(
         cart.map((item) =>
           createSaleItem.mutateAsync({
-            sale_id:    sale.id,
+            sale_id: sale.id,
             product_id: item.product.id,
-            qty:        item.qty,
+            qty: item.qty,
             unit_price: parseFloat(item.product.price as string),
             // total omitted — backend computes qty * unit_price
           }),
@@ -305,9 +386,9 @@ export function POSCheckout() {
       await createPayment.mutateAsync({
         sale_id: sale.id,
         method,
-        amount:  total,
-        status:  "completed",
-        ref:     ref || undefined,
+        amount: total,
+        status: "completed",
+        ref: ref || undefined,
         paid_at: new Date().toISOString(),
       });
 
@@ -321,9 +402,18 @@ export function POSCheckout() {
     }
   };
 
-  const storeOptions    = (stores    ?? []).map((s) => ({ label: s.name,             value: s.id }));
-  const customerOptions = [{ label: "Walk-in Customer", value: "" }, ...(customers ?? []).map((c) => ({ label: c.name, value: c.id }))];
-  const employeeOptions = [{ label: "No Cashier",       value: "" }, ...(employees ?? []).map((e) => ({ label: e.name, value: e.id }))];
+  const storeOptions = (stores ?? []).map((s) => ({
+    label: s.name,
+    value: s.id,
+  }));
+  const customerOptions = [
+    { label: t("walkInCustomer"), value: "" },
+    ...(customers ?? []).map((c) => ({ label: c.name, value: c.id })),
+  ];
+  const employeeOptions = [
+    { label: t("noCashier"), value: "" },
+    ...(employees ?? []).map((e) => ({ label: e.name, value: e.id })),
+  ];
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 h-full">
@@ -332,20 +422,20 @@ export function POSCheckout() {
         {/* Context selectors */}
         <div className="grid grid-cols-3 gap-3">
           <Select
-            label="Store *"
-            placeholder="Select store…"
+            label={t("storeLabel")}
+            placeholder={t("storePlaceholder")}
             options={storeOptions}
             value={storeId}
             onChange={setStoreId}
           />
           <Select
-            label="Customer"
+            label={t("customerLabel")}
             options={customerOptions}
             value={custId}
             onChange={setCustId}
           />
           <Select
-            label="Cashier"
+            label={t("cashierLabel")}
             options={employeeOptions}
             value={empId}
             onChange={setEmpId}
@@ -354,7 +444,7 @@ export function POSCheckout() {
 
         {/* Search */}
         <Input
-          placeholder="Search products by name, SKU or barcode…"
+          placeholder={t("searchPlaceholder")}
           icon={<Search size={14} />}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -381,17 +471,18 @@ export function POSCheckout() {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = "var(--border-accent)";
-                  e.currentTarget.style.background  = "var(--accent-muted)";
+                  e.currentTarget.style.background = "var(--accent-muted)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.background  = "var(--bg-surface)";
+                  e.currentTarget.style.background = "var(--bg-surface)";
                 }}
               >
                 <div
                   className="rounded-lg flex items-center justify-center mb-2 text-xs font-bold"
                   style={{
-                    width: 36, height: 36,
+                    width: 36,
+                    height: 36,
                     background: "var(--accent-muted)",
                     color: "var(--accent)",
                   }}
@@ -404,10 +495,16 @@ export function POSCheckout() {
                 >
                   {product.name}
                 </p>
-                <p className="text-xs font-mono" style={{ color: "var(--text-muted)" }}>
+                <p
+                  className="text-xs font-mono"
+                  style={{ color: "var(--text-muted)" }}
+                >
                   {product.sku}
                 </p>
-                <p className="text-sm font-bold mt-1.5" style={{ color: "var(--accent)" }}>
+                <p
+                  className="text-sm font-bold mt-1.5"
+                  style={{ color: "var(--accent)" }}
+                >
                   {formatCurrency(parseFloat(product.price as string))}
                 </p>
               </motion.button>
@@ -418,7 +515,7 @@ export function POSCheckout() {
               className="col-span-full py-10 text-center text-sm"
               style={{ color: "var(--text-muted)" }}
             >
-              No products found
+              {t("noProductsFound")}
             </div>
           )}
         </div>
@@ -437,8 +534,11 @@ export function POSCheckout() {
           className="flex items-center justify-between px-5 py-4 border-b"
           style={{ borderColor: "var(--border)" }}
         >
-          <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-            Cart
+          <h3
+            className="text-sm font-semibold"
+            style={{ color: "var(--text-primary)" }}
+          >
+            {t("cart")}
           </h3>
           {cart.length > 0 && (
             <button
@@ -446,7 +546,7 @@ export function POSCheckout() {
               className="text-xs transition-colors"
               style={{ color: "var(--danger)" }}
             >
-              Clear all
+              {t("clearAll")}
             </button>
           )}
         </div>
@@ -462,7 +562,7 @@ export function POSCheckout() {
               >
                 <Receipt size={28} style={{ color: "var(--text-muted)" }} />
                 <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-                  Add products to start a sale
+                  {t("emptyCart")}
                 </p>
               </motion.div>
             )}
@@ -494,7 +594,8 @@ export function POSCheckout() {
                     onClick={() => setQty(item.product.id, item.qty - 1)}
                     className="flex items-center justify-center rounded-md transition-colors"
                     style={{
-                      width: 24, height: 24,
+                      width: 24,
+                      height: 24,
                       background: "var(--bg-surface)",
                       border: "1px solid var(--border)",
                       color: "var(--text-secondary)",
@@ -512,7 +613,8 @@ export function POSCheckout() {
                     onClick={() => setQty(item.product.id, item.qty + 1)}
                     className="flex items-center justify-center rounded-md transition-colors"
                     style={{
-                      width: 24, height: 24,
+                      width: 24,
+                      height: 24,
                       background: "var(--bg-surface)",
                       border: "1px solid var(--border)",
                       color: "var(--text-secondary)",
@@ -526,7 +628,9 @@ export function POSCheckout() {
                   className="text-xs font-semibold w-16 text-right"
                   style={{ color: "var(--text-primary)" }}
                 >
-                  {formatCurrency(item.qty * parseFloat(item.product.price as string))}
+                  {formatCurrency(
+                    item.qty * parseFloat(item.product.price as string),
+                  )}
                 </span>
                 <button onClick={() => setQty(item.product.id, 0)}>
                   <Trash2 size={14} style={{ color: "var(--danger)" }} />
@@ -543,7 +647,12 @@ export function POSCheckout() {
         >
           {/* Discount */}
           <div className="flex items-center gap-3">
-            <span className="text-xs flex-1" style={{ color: "var(--text-secondary)" }}>Discount</span>
+            <span
+              className="text-xs flex-1"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {t("discount")}
+            </span>
             <input
               type="number"
               min={0}
@@ -561,9 +670,16 @@ export function POSCheckout() {
           {/* Summary rows */}
           <div className="space-y-1 text-xs">
             {[
-              { label: "Subtotal",  value: formatCurrency(subtotal) },
-              { label: "Tax (15%)", value: formatCurrency(tax) },
-              ...(discount > 0 ? [{ label: "Discount", value: `-${formatCurrency(discount)}` }] : []),
+              { label: t("subtotal"), value: formatCurrency(subtotal) },
+              { label: t("tax"), value: formatCurrency(tax) },
+              ...(discount > 0
+                ? [
+                    {
+                      label: t("discount"),
+                      value: `-${formatCurrency(discount)}`,
+                    },
+                  ]
+                : []),
             ].map(({ label, value }) => (
               <div key={label} className="flex justify-between">
                 <span style={{ color: "var(--text-muted)" }}>{label}</span>
@@ -576,8 +692,10 @@ export function POSCheckout() {
             className="flex justify-between text-base font-bold pt-2 border-t"
             style={{ borderColor: "var(--border)" }}
           >
-            <span style={{ color: "var(--text-primary)" }}>Total</span>
-            <span style={{ color: "var(--accent)" }}>{formatCurrency(total)}</span>
+            <span style={{ color: "var(--text-primary)" }}>{t("total")}</span>
+            <span style={{ color: "var(--accent)" }}>
+              {formatCurrency(total)}
+            </span>
           </div>
 
           <Button
@@ -587,12 +705,15 @@ export function POSCheckout() {
             disabled={cart.length === 0 || !storeId}
             onClick={() => setPaymentOpen(true)}
           >
-            Charge {formatCurrency(total)}
+            {t("charge", { amount: formatCurrency(total) })}
           </Button>
 
-          {(!storeId) && (
-            <p className="text-center text-xs" style={{ color: "var(--text-muted)" }}>
-              Select a store to enable checkout
+          {!storeId && (
+            <p
+              className="text-center text-xs"
+              style={{ color: "var(--text-muted)" }}
+            >
+              {t("selectStoreWarning")}
             </p>
           )}
         </div>

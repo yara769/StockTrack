@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/routing";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
@@ -17,22 +16,24 @@ import {
   BarChart3,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const navItems = [
-  { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/inventory", label: "Inventory", icon: Package },
-  { href: "/pos", label: "POS / Sales", icon: ShoppingCart },
-  { href: "/purchases", label: "Purchases", icon: Truck },
-  { href: "/returns", label: "Returns", icon: RotateCcw },
-  { href: "/payments", label: "Payments", icon: CreditCard },
-  { href: "/customers", label: "Customers", icon: Users },
-  { href: "/stores", label: "Stores", icon: Store },
-  { href: "/reports", label: "Reports", icon: BarChart3 },
+  { href: "/", key: "dashboard", icon: LayoutDashboard },
+  { href: "/inventory", key: "inventory", icon: Package },
+  { href: "/pos", key: "pos", icon: ShoppingCart },
+  { href: "/purchases", key: "purchases", icon: Truck },
+  { href: "/returns", key: "returns", icon: RotateCcw },
+  { href: "/payments", key: "payments", icon: CreditCard },
+  { href: "/customers", key: "customers", icon: Users },
+  { href: "/stores", key: "stores", icon: Store },
+  { href: "/reports", key: "reports", icon: BarChart3 },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const t = useTranslations("Sidebar");
 
   return (
     <motion.aside
@@ -77,7 +78,7 @@ export function Sidebar() {
 
       {/* Nav */}
       <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto scrollable">
-        {navItems.map(({ href, label, icon: Icon }) => {
+        {navItems.map(({ href, key, icon: Icon }) => {
           const active =
             pathname === href || (href !== "/" && pathname.startsWith(href));
           return (
@@ -104,7 +105,7 @@ export function Sidebar() {
                       transition={{ duration: 0.1 }}
                       className="whitespace-nowrap"
                     >
-                      {label}
+                      {t(key)}
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -134,7 +135,7 @@ export function Sidebar() {
                 animate={{ opacity: 1 }}
                 className="ml-1 text-xs"
               >
-                Collapse
+                {t("collapse")}
               </motion.span>
             </AnimatePresence>
           </>

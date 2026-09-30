@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Plus, Search, Building2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   useSuppliers,
   useCreateSupplier,
@@ -25,16 +26,17 @@ interface SupplierModalProps {
 }
 
 function SupplierModal({ open, onClose, initial }: SupplierModalProps) {
-  const isEdit    = !!initial?.id;
+  const t = useTranslations("suppliers");
+  const isEdit = !!initial?.id;
   const createMut = useCreateSupplier();
   const updateMut = useUpdateSupplier();
 
   const [form, setForm] = useState<Partial<CreateSupplierDto>>({
-    name:           initial?.name            ?? "",
-    contact_person: initial?.contact_person  ?? "",
-    phone:          initial?.phone           ?? "",
-    email:          initial?.email           ?? "",
-    address:        initial?.address         ?? "",
+    name: initial?.name ?? "",
+    contact_person: initial?.contact_person ?? "",
+    phone: initial?.phone ?? "",
+    email: initial?.email ?? "",
+    address: initial?.address ?? "",
   });
 
   const set = (k: keyof typeof form, v: string) =>
@@ -42,11 +44,11 @@ function SupplierModal({ open, onClose, initial }: SupplierModalProps) {
 
   const handleSubmit = async () => {
     const dto: CreateSupplierDto = {
-      name:           form.name!,
+      name: form.name!,
       contact_person: form.contact_person || undefined,
-      phone:          form.phone          || undefined,
-      email:          form.email          || undefined,
-      address:        form.address        || undefined,
+      phone: form.phone || undefined,
+      email: form.email || undefined,
+      address: form.address || undefined,
     };
     if (isEdit) {
       await updateMut.mutateAsync({ id: initial!.id!, dto });
@@ -62,47 +64,49 @@ function SupplierModal({ open, onClose, initial }: SupplierModalProps) {
     <Modal
       open={open}
       onClose={onClose}
-      title={isEdit ? "Edit Supplier" : "New Supplier"}
+      title={isEdit ? t("modals.edit_title") : t("modals.new_title")}
       size="md"
     >
       <div className="space-y-4">
         <Input
-          label="Company Name *"
-          placeholder="Supplier Inc."
+          label={t("modals.company_name_label")}
+          placeholder={t("modals.company_name_placeholder")}
           value={form.name}
           onChange={(e) => set("name", e.target.value)}
         />
         <Input
-          label="Contact Person"
-          placeholder="John Doe"
+          label={t("modals.contact_person_label")}
+          placeholder={t("modals.contact_person_placeholder")}
           value={form.contact_person}
           onChange={(e) => set("contact_person", e.target.value)}
         />
         <div className="grid grid-cols-2 gap-3">
           <Input
-            label="Phone"
-            placeholder="+966 5x xxx xxxx"
+            label={t("modals.phone_label")}
+            placeholder={t("modals.phone_placeholder")}
             value={form.phone}
             onChange={(e) => set("phone", e.target.value)}
           />
           <Input
-            label="Email"
+            label={t("modals.email_label")}
             type="email"
-            placeholder="contact@supplier.com"
+            placeholder={t("modals.email_placeholder")}
             value={form.email}
             onChange={(e) => set("email", e.target.value)}
           />
         </div>
         <Input
-          label="Address"
-          placeholder="Street, City, Country"
+          label={t("modals.address_label")}
+          placeholder={t("modals.address_placeholder")}
           value={form.address}
           onChange={(e) => set("address", e.target.value)}
         />
         <div className="flex gap-3 pt-2 justify-end">
-          <Button variant="secondary" onClick={onClose}>Cancel</Button>
+          <Button variant="secondary" onClick={onClose}>
+            {t("buttons.cancel")}
+          </Button>
           <Button onClick={handleSubmit} loading={loading}>
-            {isEdit ? "Save Changes" : "Add Supplier"}
+            {isEdit ? t("buttons.save_changes") : t("buttons.add_supplier")}
           </Button>
         </div>
       </div>
@@ -112,12 +116,13 @@ function SupplierModal({ open, onClose, initial }: SupplierModalProps) {
 
 // ── Main component ───────────────────────────────────────────────────────────
 export function SuppliersTab() {
+  const t = useTranslations("suppliers");
   const { data: suppliers, isLoading } = useSuppliers();
   const deleteMut = useDeleteSupplier();
 
-  const [search, setSearch]   = useState("");
+  const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [editing, setEditing]     = useState<Supplier | undefined>();
+  const [editing, setEditing] = useState<Supplier | undefined>();
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
@@ -132,13 +137,14 @@ export function SuppliersTab() {
   const columns = [
     {
       key: "name",
-      header: "Supplier",
+      header: t("table.supplier"),
       render: (r: Supplier) => (
         <div className="flex items-center gap-3">
           <div
             className="flex items-center justify-center rounded-lg text-xs font-bold shrink-0"
             style={{
-              width: 36, height: 36,
+              width: 36,
+              height: 36,
               background: "var(--accent-muted)",
               color: "var(--accent)",
             }}
@@ -146,7 +152,9 @@ export function SuppliersTab() {
             {r.name.slice(0, 2).toUpperCase()}
           </div>
           <div>
-            <p className="font-medium" style={{ color: "var(--text-primary)" }}>{r.name}</p>
+            <p className="font-medium" style={{ color: "var(--text-primary)" }}>
+              {r.name}
+            </p>
             <p className="text-xs" style={{ color: "var(--text-muted)" }}>
               {r.contact_person ?? "—"}
             </p>
@@ -156,7 +164,7 @@ export function SuppliersTab() {
     },
     {
       key: "phone",
-      header: "Phone",
+      header: t("table.phone"),
       render: (r: Supplier) => (
         <span className="text-sm" style={{ color: "var(--text-secondary)" }}>
           {r.phone ?? "—"}
@@ -165,7 +173,7 @@ export function SuppliersTab() {
     },
     {
       key: "email",
-      header: "Email",
+      header: t("table.email"),
       render: (r: Supplier) => (
         <span className="text-sm" style={{ color: "var(--text-secondary)" }}>
           {r.email ?? "—"}
@@ -174,7 +182,7 @@ export function SuppliersTab() {
     },
     {
       key: "address",
-      header: "Address",
+      header: t("table.address"),
       render: (r: Supplier) => (
         <span className="text-xs" style={{ color: "var(--text-muted)" }}>
           {r.address ?? "—"}
@@ -183,10 +191,10 @@ export function SuppliersTab() {
     },
     {
       key: "status",
-      header: "Status",
+      header: t("table.status"),
       render: (r: Supplier) => (
         <Badge variant={r.is_active ? "success" : "muted"}>
-          {r.is_active ? "Active" : "Inactive"}
+          {r.is_active ? t("table.status_active") : t("table.status_inactive")}
         </Badge>
       ),
     },
@@ -198,9 +206,12 @@ export function SuppliersTab() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => { setEditing(r); setModalOpen(true); }}
+            onClick={() => {
+              setEditing(r);
+              setModalOpen(true);
+            }}
           >
-            Edit
+            {t("buttons.edit")}
           </Button>
           <Button
             variant="danger"
@@ -208,7 +219,7 @@ export function SuppliersTab() {
             loading={deleteMut.isPending}
             onClick={() => deleteMut.mutate(r.id)}
           >
-            Delete
+            {t("buttons.delete")}
           </Button>
         </div>
       ),
@@ -219,7 +230,7 @@ export function SuppliersTab() {
     <div className="space-y-5">
       <div className="flex items-center justify-between gap-3">
         <Input
-          placeholder="Search suppliers…"
+          placeholder={t("filters.search_placeholder")}
           icon={<Search size={14} />}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -227,9 +238,12 @@ export function SuppliersTab() {
         />
         <Button
           icon={<Plus size={16} />}
-          onClick={() => { setEditing(undefined); setModalOpen(true); }}
+          onClick={() => {
+            setEditing(undefined);
+            setModalOpen(true);
+          }}
         >
-          New Supplier
+          {t("buttons.new_supplier")}
         </Button>
       </div>
 
@@ -237,8 +251,8 @@ export function SuppliersTab() {
         <SkeletonTable rows={5} cols={6} />
       ) : filtered.length === 0 ? (
         <EmptyState
-          title="No suppliers yet"
-          description="Add your first supplier to start creating purchase orders."
+          title={t("empty_state.title")}
+          description={t("empty_state.description")}
           icon={<Building2 size={28} />}
         />
       ) : (
@@ -247,7 +261,10 @@ export function SuppliersTab() {
 
       <SupplierModal
         open={modalOpen}
-        onClose={() => { setModalOpen(false); setEditing(undefined); }}
+        onClose={() => {
+          setModalOpen(false);
+          setEditing(undefined);
+        }}
         initial={editing}
       />
     </div>

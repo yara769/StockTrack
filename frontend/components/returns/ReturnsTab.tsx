@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Plus, Search, RotateCcw } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   useReturns,
   useSales,
@@ -28,76 +29,90 @@ interface CreateReturnModalProps {
   saleOptions: { label: string; value: string }[];
 }
 
-function CreateReturnModal({ open, onClose, saleOptions }: CreateReturnModalProps) {
+function CreateReturnModal({
+  open,
+  onClose,
+  saleOptions,
+}: CreateReturnModalProps) {
+  const t = useTranslations("returns");
   const createMut = useCreateReturn();
   const [form, setForm] = useState<Partial<CreateReturnDto>>({
-    sale_id:       "",
-    reason:        "",
+    sale_id: "",
+    reason: "",
     refund_amount: 0,
-    status:        "pending",
+    status: "pending",
   });
   const set = (k: keyof typeof form, v: string | number) =>
     setForm((f) => ({ ...f, [k]: v }));
 
   const statusOptions = [
-    { label: "Pending",   value: "pending" },
-    { label: "Approved",  value: "approved" },
-    { label: "Rejected",  value: "rejected" },
-    { label: "Completed", value: "completed" },
+    { label: t("status.pending"), value: "pending" },
+    { label: t("status.approved"), value: "approved" },
+    { label: t("status.rejected"), value: "rejected" },
+    { label: t("status.completed"), value: "completed" },
   ];
 
   const handleSubmit = async () => {
     if (!form.sale_id) return;
     await createMut.mutateAsync({
-      sale_id:       form.sale_id!,
-      reason:        form.reason        || undefined,
+      sale_id: form.sale_id!,
+      reason: form.reason || undefined,
       refund_amount: Number(form.refund_amount),
-      status:        form.status        || "pending",
+      status: form.status || "pending",
     });
     onClose();
     setForm({ sale_id: "", reason: "", refund_amount: 0, status: "pending" });
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="Create Return Request" size="md">
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={t("createModal.title")}
+      size="md"
+    >
       <div className="space-y-4">
         <Select
-          label="Sale *"
-          placeholder="Select sale…"
+          label={t("createModal.saleLabel")}
+          placeholder={t("createModal.salePlaceholder")}
           options={saleOptions}
           value={form.sale_id}
           onChange={(v) => set("sale_id", v)}
         />
         <Input
-          label="Reason"
-          placeholder="Describe the return reason…"
+          label={t("createModal.reasonLabel")}
+          placeholder={t("createModal.reasonPlaceholder")}
           value={form.reason}
           onChange={(e) => set("reason", e.target.value)}
         />
         <div className="grid grid-cols-2 gap-3">
           <Input
-            label="Refund Amount"
+            label={t("createModal.refundAmountLabel")}
             type="number"
             min={0}
             step="0.01"
             value={form.refund_amount}
-            onChange={(e) => set("refund_amount", Math.max(0, Number(e.target.value)))}
+            onChange={(e) =>
+              set("refund_amount", Math.max(0, Number(e.target.value)))
+            }
           />
           <Select
-            label="Status"
+            label={t("createModal.statusLabel")}
             options={statusOptions}
             value={form.status}
             onChange={(v) => set("status", v)}
           />
         </div>
         <div className="flex gap-3 pt-2 justify-end">
-          <Button variant="secondary" onClick={onClose}>Cancel</Button>
+          <Button variant="secondary" onClick={onClose}>
+            {t("createModal.cancel")}
+          </Button>
           <Button
             loading={createMut.isPending}
             disabled={!form.sale_id}
             onClick={handleSubmit}
           >
-            Submit Return
+            {t("createModal.submit")}
           </Button>
         </div>
       </div>
@@ -113,14 +128,15 @@ interface UpdateReturnModalProps {
 }
 
 function UpdateReturnModal({ open, onClose, ret }: UpdateReturnModalProps) {
+  const t = useTranslations("returns");
   const updateMut = useUpdateReturn();
   const [status, setStatus] = useState(ret?.status ?? "pending");
 
   const statusOptions = [
-    { label: "Pending",   value: "pending" },
-    { label: "Approved",  value: "approved" },
-    { label: "Rejected",  value: "rejected" },
-    { label: "Completed", value: "completed" },
+    { label: t("status.pending"), value: "pending" },
+    { label: t("status.approved"), value: "approved" },
+    { label: t("status.rejected"), value: "rejected" },
+    { label: t("status.completed"), value: "completed" },
   ];
 
   const handleSubmit = async () => {
@@ -130,17 +146,26 @@ function UpdateReturnModal({ open, onClose, ret }: UpdateReturnModalProps) {
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="Update Return Status" size="sm">
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={t("updateModal.title")}
+      size="sm"
+    >
       <div className="space-y-4">
         <Select
-          label="New Status"
+          label={t("updateModal.statusLabel")}
           options={statusOptions}
           value={status}
           onChange={setStatus}
         />
         <div className="flex gap-3 justify-end">
-          <Button variant="secondary" onClick={onClose}>Cancel</Button>
-          <Button loading={updateMut.isPending} onClick={handleSubmit}>Update</Button>
+          <Button variant="secondary" onClick={onClose}>
+            {t("updateModal.cancel")}
+          </Button>
+          <Button loading={updateMut.isPending} onClick={handleSubmit}>
+            {t("updateModal.update")}
+          </Button>
         </div>
       </div>
     </Modal>
@@ -149,15 +174,16 @@ function UpdateReturnModal({ open, onClose, ret }: UpdateReturnModalProps) {
 
 // ── Main tab ─────────────────────────────────────────────────────────────────
 export function ReturnsTab() {
+  const t = useTranslations("returns");
   const { data: returns, isLoading } = useReturns();
-  const { data: sales }              = useSales();
+  const { data: sales } = useSales();
   const deleteMut = useDeleteReturn();
 
-  const [search, setSearch]       = useState("");
+  const [search, setSearch] = useState("");
   const [statusFilter, setStatus] = useState("all");
   const [createOpen, setCreateOpen] = useState(false);
-  const [editRet, setEditRet]       = useState<Return | null>(null);
-  const [editOpen, setEditOpen]     = useState(false);
+  const [editRet, setEditRet] = useState<Return | null>(null);
+  const [editOpen, setEditOpen] = useState(false);
 
   const saleOptions = (sales ?? []).map((s) => ({
     label: `#${s.id.slice(0, 8).toUpperCase()} — ${formatCurrency(parseFloat(s.total))}`,
@@ -165,50 +191,60 @@ export function ReturnsTab() {
   }));
 
   const statusOptions = [
-    { label: "All",       value: "all" },
-    { label: "Pending",   value: "pending" },
-    { label: "Approved",  value: "approved" },
-    { label: "Rejected",  value: "rejected" },
-    { label: "Completed", value: "completed" },
+    { label: t("status.all"), value: "all" },
+    { label: t("status.pending"), value: "pending" },
+    { label: t("status.approved"), value: "approved" },
+    { label: t("status.rejected"), value: "rejected" },
+    { label: t("status.completed"), value: "completed" },
   ];
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     return (returns ?? []).filter((r) => {
-      const matchSearch = r.id.includes(q) || (r.reason ?? "").toLowerCase().includes(q);
+      const matchSearch =
+        r.id.includes(q) || (r.reason ?? "").toLowerCase().includes(q);
       const matchStatus = statusFilter === "all" || r.status === statusFilter;
       return matchSearch && matchStatus;
     });
   }, [returns, search, statusFilter]);
 
-  const pending  = (returns ?? []).filter((r) => r.status === "pending").length;
-  const approved = (returns ?? []).filter((r) => r.status === "approved").length;
+  const pending = (returns ?? []).filter((r) => r.status === "pending").length;
+  const approved = (returns ?? []).filter(
+    (r) => r.status === "approved",
+  ).length;
   const totalRefunds = (returns ?? []).reduce(
-    (s, r) => s + parseFloat(r.refund_amount as string ?? "0"), 0,
+    (s, r) => s + parseFloat((r.refund_amount as string) ?? "0"),
+    0,
   );
 
   const columns = [
     {
       key: "id",
-      header: "Return #",
+      header: t("columns.returnId"),
       render: (r: Return) => (
-        <span className="font-mono text-xs" style={{ color: "var(--text-muted)" }}>
+        <span
+          className="font-mono text-xs"
+          style={{ color: "var(--text-muted)" }}
+        >
           #{r.id.slice(0, 8).toUpperCase()}
         </span>
       ),
     },
     {
       key: "sale_id",
-      header: "Sale",
+      header: t("columns.sale"),
       render: (r: Return) => (
-        <span className="font-mono text-xs" style={{ color: "var(--text-secondary)" }}>
+        <span
+          className="font-mono text-xs"
+          style={{ color: "var(--text-secondary)" }}
+        >
           #{r.sale_id.slice(0, 8).toUpperCase()}
         </span>
       ),
     },
     {
       key: "reason",
-      header: "Reason",
+      header: t("columns.reason"),
       render: (r: Return) => (
         <span className="text-sm" style={{ color: "var(--text-secondary)" }}>
           {r.reason ?? "—"}
@@ -217,7 +253,7 @@ export function ReturnsTab() {
     },
     {
       key: "refund_amount",
-      header: "Refund",
+      header: t("columns.refund"),
       render: (r: Return) => (
         <span className="font-semibold" style={{ color: "var(--danger)" }}>
           {formatCurrency(parseFloat(r.refund_amount as string))}
@@ -226,14 +262,14 @@ export function ReturnsTab() {
     },
     {
       key: "created_at",
-      header: "Date",
+      header: t("columns.date"),
       render: (r: Return) => (
         <span className="text-xs">{formatDate(r.created_at)}</span>
       ),
     },
     {
       key: "status",
-      header: "Status",
+      header: t("columns.status"),
       render: (r: Return) => <StatusBadge status={r.status} />,
     },
     {
@@ -244,9 +280,12 @@ export function ReturnsTab() {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => { setEditRet(r); setEditOpen(true); }}
+            onClick={() => {
+              setEditRet(r);
+              setEditOpen(true);
+            }}
           >
-            Update
+            {t("columns.actions.update")}
           </Button>
           <Button
             variant="danger"
@@ -254,7 +293,7 @@ export function ReturnsTab() {
             loading={deleteMut.isPending}
             onClick={() => deleteMut.mutate(r.id)}
           >
-            Delete
+            {t("columns.actions.delete")}
           </Button>
         </div>
       ),
@@ -266,19 +305,19 @@ export function ReturnsTab() {
       {/* Summary */}
       <div className="grid grid-cols-3 gap-4">
         <StatTile
-          label="Total Returns"
-          value={(returns?.length ?? 0)}
+          label={t("summary.totalReturns")}
+          value={returns?.length ?? 0}
           icon={<RotateCcw size={18} />}
           accentColor="var(--accent)"
         />
         <StatTile
-          label="Pending"
+          label={t("summary.pending")}
           value={pending}
           icon={<RotateCcw size={18} />}
           accentColor="var(--amber)"
         />
         <StatTile
-          label="Total Refunds"
+          label={t("summary.totalRefunds")}
           value={formatCurrency(totalRefunds)}
           icon={<RotateCcw size={18} />}
           accentColor="var(--danger)"
@@ -289,7 +328,7 @@ export function ReturnsTab() {
       <div className="flex flex-wrap items-center gap-3 justify-between">
         <div className="flex gap-3 flex-wrap">
           <Input
-            placeholder="Search by ID or reason…"
+            placeholder={t("toolbar.searchPlaceholder")}
             icon={<Search size={14} />}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -303,7 +342,7 @@ export function ReturnsTab() {
           />
         </div>
         <Button icon={<Plus size={16} />} onClick={() => setCreateOpen(true)}>
-          New Return
+          {t("toolbar.newReturn")}
         </Button>
       </div>
 
@@ -311,7 +350,11 @@ export function ReturnsTab() {
       {isLoading ? (
         <SkeletonTable rows={5} cols={7} />
       ) : filtered.length === 0 ? (
-        <EmptyState title="No returns" description="Return requests will appear here." icon={<RotateCcw size={28} />} />
+        <EmptyState
+          title={t("emptyState.title")}
+          description={t("emptyState.description")}
+          icon={<RotateCcw size={28} />}
+        />
       ) : (
         <Table columns={columns} data={filtered} keyField="id" />
       )}
@@ -323,7 +366,10 @@ export function ReturnsTab() {
       />
       <UpdateReturnModal
         open={editOpen}
-        onClose={() => { setEditOpen(false); setEditRet(null); }}
+        onClose={() => {
+          setEditOpen(false);
+          setEditRet(null);
+        }}
         ret={editRet}
       />
     </div>

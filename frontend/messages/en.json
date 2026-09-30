@@ -113,18 +113,18 @@
     "lowStock": {
       "label": "Low Stock Alerts",
       "sub": "of {count} products"
-    },
-    "RecentTransactions": {
-      "title": "Recent Transactions",
-      "subtitle": "Last 10 sales",
-      "table": {
-        "saleId": "Sale ID",
-        "date": "Date",
-        "customer": "Customer",
-        "walkIn": "Walk-in",
-        "total": "Total",
-        "status": "Status"
-      }
+    }
+  },
+  "RecentTransactions": {
+    "title": "Recent Transactions",
+    "subtitle": "Last 10 sales",
+    "table": {
+      "saleId": "Sale ID",
+      "date": "Date",
+      "customer": "Customer",
+      "walkIn": "Walk-in",
+      "total": "Total",
+      "status": "Status"
     }
   },
   "RevenueChart": {
@@ -151,5 +151,338 @@
   },
   "Header": {
     "searchPlaceholder": "Search…"
+  },
+  "Sidebar": {
+    "dashboard": "Dashboard",
+    "inventory": "Inventory",
+    "pos": "POS / Sales",
+    "purchases": "Purchases",
+    "returns": "Returns",
+    "payments": "Payments",
+    "customers": "Customers",
+    "stores": "Stores",
+    "reports": "Reports",
+    "collapse": "Collapse"
+  },
+  "POS": {
+    "storeLabel": "Store *",
+    "storePlaceholder": "Select store…",
+    "customerLabel": "Customer",
+    "walkInCustomer": "Walk-in Customer",
+    "cashierLabel": "Cashier",
+    "noCashier": "No Cashier",
+    "searchPlaceholder": "Search products by name, SKU or barcode…",
+    "noProductsFound": "No products found",
+    "cart": "Cart",
+    "clearAll": "Clear all",
+    "emptyCart": "Add products to start a sale",
+    "discount": "Discount",
+    "subtotal": "Subtotal",
+    "tax": "Tax (15%)",
+    "total": "Total",
+    "charge": "Charge {amount}",
+    "selectStoreWarning": "Select a store to enable checkout",
+    "PaymentModal": {
+      "title": "Process Payment",
+      "totalDue": "Total Due",
+      "paymentMethod": "Payment Method",
+      "cash": "Cash",
+      "card": "Card",
+      "transfer": "Transfer",
+      "refLabel": "Reference / Transaction ID",
+      "refPlaceholder": "Optional",
+      "cancel": "Cancel",
+      "confirm": "Confirm Payment"
+    },
+    "InvoiceModal": {
+      "title": "Sale Receipt",
+      "success": "Payment Successful",
+      "paidVia": "Paid via {method}",
+      "newSale": "New Sale"
+    }
+  },
+  "SalesHistory": {
+    "modalTitle": "Sale #{id}",
+    "labels": {
+      "date": "Date",
+      "customer": "Customer",
+      "status": "Status",
+      "items": "Items",
+      "subtotal": "Subtotal",
+      "tax": "Tax",
+      "discount": "Discount",
+      "total": "Total",
+      "payments": "Payments"
+    },
+    "defaults": {
+      "walkIn": "Walk-in",
+      "noItems": "No item details available"
+    },
+    "columns": {
+      "saleId": "Sale ID",
+      "date": "Date",
+      "customer": "Customer",
+      "cashier": "Cashier",
+      "total": "Total",
+      "status": "Status"
+    },
+    "searchPlaceholder": "Search by ID, customer, or status…",
+    "recordsCount": "{count} records",
+    "actions": {
+      "view": "View"
+    },
+    "emptyState": {
+      "title": "No sales found",
+      "description": "Transactions will appear here once sales are made."
+    }
+  },
+  "purchase_orders": {
+    "title": "Purchase Orders",
+    "stats": {
+      "total_orders": "Total Orders",
+      "pending": "Pending",
+      "total_value": "Total Value"
+    },
+    "filters": {
+      "search_placeholder": "Search by ID or supplier…",
+      "status_all": "All",
+      "status_pending": "Pending",
+      "status_received": "Received"
+    },
+    "buttons": {
+      "new_po": "New PO",
+      "add_row": "Add Row",
+      "place_order": "Place Order",
+      "cancel": "Cancel",
+      "view": "View",
+      "delete": "Delete",
+      "mark_as_received": "Mark as Received"
+    },
+    "table": {
+      "po_number": "PO #",
+      "supplier": "Supplier",
+      "store": "Store",
+      "ordered": "Ordered",
+      "expected": "Expected",
+      "total": "Total",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "modals": {
+      "create_title": "Create Purchase Order",
+      "supplier_label": "Supplier *",
+      "supplier_placeholder": "Select supplier…",
+      "store_label": "Store *",
+      "store_placeholder": "Deliver to…",
+      "expected_date_label": "Expected Date",
+      "items_title": "Items",
+      "product_header": "Product",
+      "qty_header": "Qty",
+      "unit_cost_header": "Unit Cost",
+      "total_header": "Total",
+      "product_placeholder": "Select product…",
+      "no_items": "No line items"
+    },
+    "empty_state": {
+      "title": "No purchase orders",
+      "description": "Create your first PO to start procuring stock."
+    }
+  },
+  "suppliers": {
+    "title": "Suppliers",
+    "modals": {
+      "edit_title": "Edit Supplier",
+      "new_title": "New Supplier",
+      "company_name_label": "Company Name *",
+      "company_name_placeholder": "Supplier Inc.",
+      "contact_person_label": "Contact Person",
+      "contact_person_placeholder": "John Doe",
+      "phone_label": "Phone",
+      "phone_placeholder": "+966 5x xxx xxxx",
+      "email_label": "Email",
+      "email_placeholder": "contact@supplier.com",
+      "address_label": "Address",
+      "address_placeholder": "Street, City, Country"
+    },
+    "table": {
+      "supplier": "Supplier",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "status": "Status",
+      "status_active": "Active",
+      "status_inactive": "Inactive"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "save_changes": "Save Changes",
+      "add_supplier": "Add Supplier",
+      "new_supplier": "New Supplier",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "search_placeholder": "Search suppliers…"
+    },
+    "empty_state": {
+      "title": "No suppliers yet",
+      "description": "Add your first supplier to start creating purchase orders."
+    }
+  },
+  "customers": {
+    "title": "Customers",
+    "stats": {
+      "total_customers": "Total Customers",
+      "loyalty_points": "Loyalty Points",
+      "top_spender": "Top Spender"
+    },
+    "modals": {
+      "edit_title": "Edit Customer",
+      "new_title": "New Customer",
+      "name_label": "Full Name *",
+      "name_placeholder": "Customer name",
+      "phone_label": "Phone",
+      "phone_placeholder": "+966 5x xxx xxxx",
+      "email_label": "Email",
+      "address_label": "Address",
+      "loyalty_points_label": "Loyalty Points"
+    },
+    "table": {
+      "customer": "Customer",
+      "phone": "Phone",
+      "points": "Points",
+      "total_spent": "Total Spent",
+      "status": "Status",
+      "status_active": "Active",
+      "status_inactive": "Inactive"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "save_changes": "Save Changes",
+      "add_customer": "Add Customer",
+      "new_customer": "New Customer",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "search_placeholder": "Search by name, phone, or email…"
+    },
+    "empty_state": {
+      "title": "No customers",
+      "description": "Add customers to track loyalty and purchase history."
+    }
+  },
+  "payments": {
+    "title": "Payments",
+    "stats": {
+      "total_collected": "Total Collected",
+      "cash": "Cash",
+      "card_transfer": "Card / Transfer"
+    },
+    "modals": {
+      "record_title": "Record Payment",
+      "sale_label": "Sale *",
+      "sale_placeholder": "Select sale…",
+      "method_label": "Method",
+      "status_label": "Status",
+      "amount_label": "Amount *",
+      "ref_label": "Reference",
+      "ref_placeholder": "Optional"
+    },
+    "methods": {
+      "all": "All Methods",
+      "cash": "Cash",
+      "card": "Card",
+      "transfer": "Transfer"
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending",
+      "failed": "Failed"
+    },
+    "table": {
+      "payment_no": "Payment #",
+      "sale": "Sale",
+      "method": "Method",
+      "amount": "Amount",
+      "ref": "Ref",
+      "paid_at": "Paid At",
+      "status": "Status"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "record_payment": "Record Payment",
+      "delete": "Delete"
+    },
+    "filters": {
+      "search_placeholder": "Search by ID, sale or ref…"
+    },
+    "empty_state": {
+      "title": "No payments",
+      "description": "Payment records will appear here."
+    }
+  },
+  "returns": {
+    "status": {
+      "all": "All",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "completed": "Completed"
+    },
+    "createModal": {
+      "title": "Create Return Request",
+      "saleLabel": "Sale *",
+      "salePlaceholder": "Select sale…",
+      "reasonLabel": "Reason",
+      "reasonPlaceholder": "Describe the return reason…",
+      "refundAmountLabel": "Refund Amount",
+      "statusLabel": "Status",
+      "cancel": "Cancel",
+      "submit": "Submit Return"
+    },
+    "updateModal": {
+      "title": "Update Return Status",
+      "statusLabel": "New Status",
+      "cancel": "Cancel",
+      "update": "Update"
+    },
+    "summary": {
+      "totalReturns": "Total Returns",
+      "pending": "Pending",
+      "totalRefunds": "Total Refunds"
+    },
+    "toolbar": {
+      "searchPlaceholder": "Search by ID or reason…",
+      "newReturn": "New Return"
+    },
+    "columns": {
+      "returnId": "Return #",
+      "sale": "Sale",
+      "reason": "Reason",
+      "refund": "Refund",
+      "date": "Date",
+      "status": "Status",
+      "actions": {
+        "update": "Update",
+        "delete": "Delete"
+      }
+    },
+    "emptyState": {
+      "title": "No returns",
+      "description": "Return requests will appear here."
+    }
+  },
+  "status": {
+    "completed": "Completed",
+    "paid": "Paid",
+    "received": "Received",
+    "active": "Active",
+    "pending": "Pending",
+    "partial": "Partial",
+    "cancelled": "Cancelled",
+    "failed": "Failed",
+    "returned": "Returned",
+    "unknown": "Unknown"
   }
 }
