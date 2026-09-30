@@ -121,15 +121,15 @@ function SaleDetailModal({
           {[
             {
               label: t("labels.subtotal"),
-              value: formatCurrency(parseFloat(sale.subtotal)),
+              value: formatCurrency(parseFloat(sale.subtotal ?? "0")),
             },
             {
               label: t("labels.tax"),
-              value: formatCurrency(parseFloat(sale.tax)),
+              value: formatCurrency(parseFloat(sale.tax ?? "0")),
             },
             {
               label: t("labels.discount"),
-              value: `-${formatCurrency(parseFloat(sale.discount))}`,
+              value: `-${formatCurrency(parseFloat(sale.discount ?? "0"))}`,
             },
           ].map(({ label, value }) => (
             <div key={label} className="flex justify-between">
@@ -145,7 +145,7 @@ function SaleDetailModal({
               {t("labels.total")}
             </span>
             <span style={{ color: "var(--accent)" }}>
-              {formatCurrency(parseFloat(sale.total))}
+              {formatCurrency(parseFloat(sale.total ?? "0"))}
             </span>
           </div>
         </div>

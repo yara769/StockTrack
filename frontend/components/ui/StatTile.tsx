@@ -44,7 +44,13 @@ export function StatTile({ label, value, sub, icon, trend, accentColor = "var(--
       {/* Background glow blob */}
       <div
         className="absolute -top-4 -right-4 w-24 h-24 rounded-full pointer-events-none"
-        style={{ background: accentColor, opacity: 0.06, filter: "blur(20px)" }}
+        style={{
+          // O-03: accentColor may be a CSS var — cannot append hex alpha directly.
+          // Use a wrapper div with opacity instead.
+          background: accentColor,
+          opacity: 0.08,
+          filter: "blur(20px)",
+        }}
       />
 
       {/* Icon */}

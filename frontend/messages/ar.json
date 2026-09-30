@@ -150,7 +150,8 @@
     "unitsSold": "{count, plural, =1 {وحدة واحدة مباعة} other {# وحدات مباعة}}"
   },
   "Header": {
-    "searchPlaceholder": "بحث…"
+    "searchPlaceholder": "بحث…",
+    "notificationsLabel": "الإشعارات"
   },
   "Sidebar": {
     "dashboard": "لوحة التحكم",
@@ -182,6 +183,8 @@
     "total": "الإجمالي",
     "charge": "تحصيل {amount}",
     "selectStoreWarning": "اختر متجراً لتمكين الدفع",
+    "increaseQty": "زيادة الكمية",
+    "decreaseQty": "تقليل الكمية",
     "PaymentModal": {
       "title": "معالجة الدفع",
       "totalDue": "المبلغ المستحق",

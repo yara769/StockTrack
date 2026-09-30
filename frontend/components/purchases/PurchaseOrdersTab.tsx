@@ -33,6 +33,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // ── PO line-item row in create form ─────────────────────────────────────────
 interface DraftItem {
+  id: string;          // stable unique id — prevents Framer Motion key collision on reorder
   product_id: string;
   qty: number;
   unit_cost: number;
@@ -62,7 +63,7 @@ function CreatePOModal({
   const [store_id, setStore] = useState("");
   const [expected_at, setExpected] = useState("");
   const [items, setItems] = useState<DraftItem[]>([
-    { product_id: "", qty: 1, unit_cost: 0 },
+    { id: crypto.randomUUID(), product_id: "", qty: 1, unit_cost: 0 },
   ]);
 
   const total = items.reduce((s, i) => s + i.qty * i.unit_cost, 0);
@@ -73,7 +74,7 @@ function CreatePOModal({
     );
 
   const addItem = () =>
-    setItems((p) => [...p, { product_id: "", qty: 1, unit_cost: 0 }]);
+    setItems((p) => [...p, { id: crypto.randomUUID(), product_id: "", qty: 1, unit_cost: 0 }]);
   const removeItem = (idx: number) =>
     setItems((p) => p.filter((_, i) => i !== idx));
 
@@ -112,7 +113,7 @@ function CreatePOModal({
     setSupplier("");
     setStore("");
     setExpected("");
-    setItems([{ product_id: "", qty: 1, unit_cost: 0 }]);
+    setItems([{ id: crypto.randomUUID(), product_id: "", qty: 1, unit_cost: 0 }]);
   };
 
   const loading = createPO.isPending || createPoItem.isPending;
@@ -196,7 +197,7 @@ function CreatePOModal({
             <AnimatePresence>
               {items.map((item, idx) => (
                 <motion.div
-                  key={idx}
+                  key={item.id}
                   initial={{ opacity: 0, y: -6 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -6 }}

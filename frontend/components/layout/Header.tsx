@@ -63,6 +63,7 @@ export function Header({ title, subtitle }: HeaderProps) {
 
         {/* Notification bell */}
         <button
+          aria-label={t("notificationsLabel")}
           className="relative flex items-center justify-center rounded-lg p-2 transition-colors"
           style={{
             background: "var(--bg-elevated)",

@@ -1,13 +1,20 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 type ButtonSize    = "sm" | "md" | "lg";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+// M-01: Remove the `as any` spread by explicitly omitting Framer-Motion-only
+// props that conflict with the HTML button interface.
+type SafeMotionButtonProps = Omit<
+  HTMLMotionProps<"button">,
+  "onAnimationStart" | "onDrag" | "onDragEnd" | "onDragStart" | "onDragOver"
+>;
+
+interface ButtonProps extends SafeMotionButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
   loading?: boolean;
@@ -51,6 +58,7 @@ export function Button({
   children,
   className,
   disabled,
+  style,
   ...rest
 }: ButtonProps) {
   return (
@@ -64,9 +72,9 @@ export function Button({
         (disabled || loading) && "opacity-50 pointer-events-none",
         className,
       )}
-      style={variantMap[variant]}
+      style={{ ...variantMap[variant], ...style }}
       disabled={disabled || loading}
-      {...(rest as any)}
+      {...rest}
     >
       {loading ? <Loader2 size={14} className="animate-spin" /> : icon}
       {children}

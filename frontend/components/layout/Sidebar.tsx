@@ -131,8 +131,10 @@ export function Sidebar() {
             <ChevronLeft size={16} />
             <AnimatePresence>
               <motion.span
+                key="collapse-label"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="ml-1 text-xs"
               >
                 {t("collapse")}

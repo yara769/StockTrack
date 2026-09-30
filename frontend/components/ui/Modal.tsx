@@ -71,6 +71,7 @@ export function Modal({ open, onClose, title, description, children, size = "md"
                   </div>
                   <button
                     onClick={onClose}
+                    aria-label="Close dialog"
                     className="rounded-lg p-1.5 transition-colors"
                     style={{ color: "var(--text-muted)" }}
                     onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}

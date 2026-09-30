@@ -21,7 +21,12 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { StatTile } from "@/components/ui/StatTile";
 import { formatCurrency, formatDateTime } from "@/lib/utils";
 
-// ── Payment method icon ───────────────────────────────────────────────────────
+// M-03: typed lookup table avoids dynamic key with `as any`
+const METHOD_LABEL_KEYS = {
+  cash:     "methods.cash",
+  card:     "methods.card",
+  transfer: "methods.transfer",
+} as const satisfies Record<string, `methods.${string}`>;
 function MethodIcon({ method }: { method: string }) {
   const m = method?.toLowerCase();
   if (m === "card")
@@ -231,7 +236,7 @@ export function PaymentsTab() {
             className="text-sm capitalize"
             style={{ color: "var(--text-secondary)" }}
           >
-            {t(`methods.${r.method.toLowerCase()}` as any) || r.method}
+            {t(METHOD_LABEL_KEYS[r.method.toLowerCase() as keyof typeof METHOD_LABEL_KEYS] ?? "methods.cash")}
           </span>
         </div>
       ),

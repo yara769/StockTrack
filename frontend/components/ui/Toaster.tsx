@@ -69,6 +69,7 @@ export function Toaster() {
               </p>
               <button
                 onClick={() => dismiss(t.id)}
+                aria-label="Dismiss notification"
                 className="shrink-0 rounded p-0.5 transition-opacity opacity-60 hover:opacity-100"
                 style={{ color: "var(--text-muted)" }}
               >

@@ -592,6 +592,7 @@ export function POSCheckout() {
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => setQty(item.product.id, item.qty - 1)}
+                    aria-label={t("decreaseQty")}
                     className="flex items-center justify-center rounded-md transition-colors"
                     style={{
                       width: 24,
@@ -611,6 +612,7 @@ export function POSCheckout() {
                   </span>
                   <button
                     onClick={() => setQty(item.product.id, item.qty + 1)}
+                    aria-label={t("increaseQty")}
                     className="flex items-center justify-center rounded-md transition-colors"
                     style={{
                       width: 24,

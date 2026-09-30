@@ -51,8 +51,11 @@ export function TopProducts() {
     <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
-          <span>{t("title")}</span>
-          <span className="text-xs font-normal text-muted-foreground">
+          <span style={{ color: "var(--text-primary)" }}>{t("title")}</span>
+          <span
+            className="text-xs font-normal"
+            style={{ color: "var(--text-muted)" }}
+          >
             {t("subtitle")}
           </span>
         </CardTitle>
@@ -61,7 +64,10 @@ export function TopProducts() {
       <CardContent className="flex-1">
         <ul className="space-y-4">
           {sorted.length === 0 && (
-            <p className="text-xs text-center py-6 text-muted-foreground">
+            <p
+              className="text-xs text-center py-6"
+              style={{ color: "var(--text-muted)" }}
+            >
               {t("empty")}
             </p>
           )}
@@ -80,17 +86,27 @@ export function TopProducts() {
                 transition={{ delay: idx * 0.05 }}
               >
                 <div className="flex items-center justify-between mb-1 text-xs">
-                  <span className="font-medium truncate max-w-[160px] text-foreground">
+                  <span
+                    className="font-medium truncate max-w-[160px]"
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     {product?.name ?? productId.slice(0, 8)}
                   </span>
-                  <span className="font-semibold text-accent">
+                  <span
+                    className="font-semibold"
+                    style={{ color: "var(--accent)" }}
+                  >
                     {formatCurrency(stats.revenue)}
                   </span>
                 </div>
 
-                <div className="h-1.5 w-full rounded-full overflow-hidden bg-border/50">
+                <div
+                  className="h-1.5 w-full rounded-full overflow-hidden"
+                  style={{ background: "var(--border)" }}
+                >
                   <motion.div
-                    className="h-full rounded-full bg-accent"
+                    className="h-full rounded-full"
+                    style={{ background: "var(--accent)" }}
                     initial={{ width: 0 }}
                     animate={{ width: `${pct}%` }}
                     transition={{
@@ -101,7 +117,10 @@ export function TopProducts() {
                   />
                 </div>
 
-                <p className="text-[10px] mt-1 text-muted-foreground">
+                <p
+                  className="text-[10px] mt-1"
+                  style={{ color: "var(--text-muted)" }}
+                >
                   {t("unitsSold", { count: stats.qty })}
                 </p>
               </motion.li>

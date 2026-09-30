@@ -150,7 +150,8 @@
     "unitsSold": "{count, plural, =1 {1 unit sold} other {# units sold}}"
   },
   "Header": {
-    "searchPlaceholder": "Search…"
+    "searchPlaceholder": "Search…",
+    "notificationsLabel": "Notifications"
   },
   "Sidebar": {
     "dashboard": "Dashboard",
@@ -182,6 +183,8 @@
     "total": "Total",
     "charge": "Charge {amount}",
     "selectStoreWarning": "Select a store to enable checkout",
+    "increaseQty": "Increase quantity",
+    "decreaseQty": "Decrease quantity",
     "PaymentModal": {
       "title": "Process Payment",
       "totalDue": "Total Due",

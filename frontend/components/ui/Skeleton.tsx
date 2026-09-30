@@ -1,19 +1,18 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface SkeletonProps {
-  className?: string;
-  lines?: number;
-}
+/**
+ * O-02 fix: replaced Framer Motion opacity pulse with a single CSS
+ * `animate-pulse` animation (Tailwind built-in).
+ * A 10×10 SkeletonTable previously spawned 100 JS-driven animations;
+ * now it uses a single shared CSS keyframe — zero JS overhead.
+ */
 
 function SkeletonBlock({ className }: { className?: string }) {
   return (
-    <motion.div
-      animate={{ opacity: [0.4, 0.8, 0.4] }}
-      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-      className={cn("rounded-md", className)}
+    <div
+      className={cn("rounded-md animate-pulse", className)}
       style={{ background: "var(--bg-elevated)" }}
     />
   );
@@ -27,7 +26,10 @@ export function SkeletonCard() {
   return (
     <div
       className="rounded-xl p-5 space-y-3"
-      style={{ background: "var(--bg-surface)", border: "1px solid var(--border)" }}
+      style={{
+        background: "var(--bg-surface)",
+        border: "1px solid var(--border)",
+      }}
     >
       <SkeletonBlock className="h-4 w-1/3" />
       <SkeletonBlock className="h-8 w-1/2" />
@@ -36,16 +38,22 @@ export function SkeletonCard() {
   );
 }
 
-export function SkeletonTable({ rows = 5, cols = 5 }: { rows?: number; cols?: number }) {
+export function SkeletonTable({
+  rows = 5,
+  cols = 5,
+}: {
+  rows?: number;
+  cols?: number;
+}) {
   return (
     <div className="space-y-2">
-      {/* header */}
+      {/* header row */}
       <div className="flex gap-3">
         {Array.from({ length: cols }).map((_, i) => (
           <SkeletonBlock key={i} className="h-4 flex-1" />
         ))}
       </div>
-      {/* rows */}
+      {/* data rows */}
       {Array.from({ length: rows }).map((_, r) => (
         <div key={r} className="flex gap-3">
           {Array.from({ length: cols }).map((_, c) => (
