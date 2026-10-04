@@ -19,6 +19,7 @@ interface ButtonProps extends SafeMotionButtonProps {
   size?: ButtonSize;
   loading?: boolean;
   icon?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const variantMap: Record<ButtonVariant, React.CSSProperties> = {

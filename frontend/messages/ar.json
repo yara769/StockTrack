@@ -130,7 +130,8 @@
   },
   "RevenueChart": {
     "title": "الإيرادات — آخر 30 يوماً"
-  }, {
+  },
+  "StockAlerts": {
     "title": "تنبيهات المخزون",
     "itemsCount": "{count} عناصر",
     "empty": {

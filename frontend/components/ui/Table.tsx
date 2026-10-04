@@ -21,7 +21,7 @@ interface TableProps<T> {
 // O-01 fix: cap stagger at 300 ms so 100-row tables don't take 3 s to animate
 const MAX_STAGGER_DELAY = 0.3;
 
-export function Table<T extends Record<string, unknown>>({
+export function Table<T extends object>({
   columns,
   data,
   keyField = "id" as keyof T,
@@ -73,7 +73,7 @@ export function Table<T extends Record<string, unknown>>({
             ) : (
               data.map((row, idx) => (
                 <motion.tr
-                  key={String(row[keyField] ?? idx)}
+                  key={String((row as Record<string, unknown>)[keyField as string] ?? idx)}
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -102,7 +102,7 @@ export function Table<T extends Record<string, unknown>>({
                     >
                       {col.render
                         ? col.render(row)
-                        : String(row[col.key as keyof T] ?? "—")}
+                        : String((row as Record<string, unknown>)[col.key as string] ?? "—")}
                     </td>
                   ))}
                 </motion.tr>

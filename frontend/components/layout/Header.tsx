@@ -3,6 +3,7 @@
 import { Bell, Search } from "lucide-react";
 import { useState } from "react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { LanguageToggle } from "@/components/ui/LanguageToggle";
 import { useTranslations } from "next-intl";
 
 interface HeaderProps {
@@ -78,6 +79,10 @@ export function Header({ title, subtitle }: HeaderProps) {
           />
         </button>
 
+        {/* Language & theme toggles */}
+        <LanguageToggle />
+        <ThemeToggle />
+
         {/* Avatar */}
         <div
           className="flex items-center justify-center rounded-full text-xs font-semibold"
@@ -90,12 +95,6 @@ export function Header({ title, subtitle }: HeaderProps) {
           }}
         >
           AD
-        </div>
-        <div
-          className="p-3 border-t flex items-center justify-between"
-          style={{ borderColor: "var(--border)" }}
-        >
-          <ThemeToggle />
         </div>
       </div>
     </header>

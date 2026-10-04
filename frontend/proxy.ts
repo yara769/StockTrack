@@ -1,4 +1,4 @@
-// middleware.ts
+// proxy.ts — replaces the deprecated middleware.ts convention (Next.js 16+)
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 

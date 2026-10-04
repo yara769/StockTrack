@@ -71,7 +71,7 @@ export default function ReportsPage() {
               <Tooltip
                 contentStyle={{ background: "var(--bg-elevated)", border: "1px solid var(--border-accent)", borderRadius: 8, fontSize: 12 }}
                 labelStyle={{ color: "var(--text-secondary)" }}
-                formatter={(v: number) => [formatCurrency(v), "Revenue"]}
+                formatter={(v) => [formatCurrency(typeof v === 'number' ? v : 0), "Revenue"]}
               />
               <Bar dataKey="revenue" fill="var(--accent)" radius={[4, 4, 0, 0]} />
             </BarChart>
